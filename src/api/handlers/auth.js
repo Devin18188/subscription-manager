@@ -51,7 +51,7 @@ async function handleLogin(request, env) {
     const token = await generateJWT(body.username, config.JWT_SECRET);
 
     return new Response(
-      JSON.stringify({ success: true }),
+      JSON.stringify({ success: true, token }),
       {
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,15 @@ function handleLogout() {
 }
 
 async function getUserFromRequest(request, env) {
-  const token = getCookieValue(request.headers.get('Cookie'), 'token');
+  let token = getCookieValue(request.headers.get('Cookie'), 'token');
+
+  if (!token) {
+    const authHeader = request.headers.get('Authorization') || '';
+    if (authHeader.startsWith('Bearer ')) {
+      token = authHeader.slice(7);
+    }
+  }
+
   const config = await getConfig(env);
   const user = token ? await verifyJWT(token, config.JWT_SECRET) : null;
   return { user, config };
