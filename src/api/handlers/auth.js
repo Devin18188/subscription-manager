@@ -55,7 +55,7 @@ async function handleLogin(request, env) {
       {
         headers: {
           'Content-Type': 'application/json',
-          'Set-Cookie': 'token=' + token + '; HttpOnly; Secure; Path=/; SameSite=Strict; Max-Age=86400'
+          'Set-Cookie': 'token=' + token + '; HttpOnly; Secure; Path=/; SameSite=None; Max-Age=86400'
         }
       }
     );
@@ -78,7 +78,7 @@ function handleLogout() {
     status: 302,
     headers: {
       'Location': '/',
-      'Set-Cookie': 'token=; HttpOnly; Secure; Path=/; SameSite=Strict; Max-Age=0'
+      'Set-Cookie': 'token=; HttpOnly; Secure; Path=/; SameSite=None; Max-Age=0'
     }
   });
 }
