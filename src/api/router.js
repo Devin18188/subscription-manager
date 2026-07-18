@@ -6,12 +6,12 @@ import { handleSubscriptions } from './handlers/subscriptions.js';
 import { getConfig } from '../data/config.js';
 import { handleTestNotification } from './handlers/test-notification.js';
 import { handleExtraRoutes } from "./handlers/extras.js";
+import { handleWxLogin } from './handlers/wx-auth.js';
 
 async function handleApiRequest(request, env) {
   const url = new URL(request.url);
   const path = url.pathname.slice(4);
   const method = request.method;
-
   const config = await getConfig(env);
 
   if (path === '/login' && method === 'POST') {
@@ -19,9 +19,9 @@ async function handleApiRequest(request, env) {
   }
 
   if (path === '/wx-login' && method === 'POST') {
-  return handleWxLogin(request, env);
-}
-  
+    return handleWxLogin(request, env);
+  }
+
   if (path === '/logout' && (method === 'GET' || method === 'POST')) {
     return handleLogout();
   }
@@ -47,7 +47,6 @@ async function handleApiRequest(request, env) {
     return handleTestNotification(request, env);
   }
 
-  // 新增路由：提醒规则 / 通知日志 / 调度日志（提醒规则 / 通知日志 / 调度日志）
   const extraResponse = await handleExtraRoutes(request, env, path);
   if (extraResponse) return extraResponse;
 
