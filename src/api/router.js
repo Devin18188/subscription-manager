@@ -18,6 +18,10 @@ async function handleApiRequest(request, env) {
     return handleLogin(request, env);
   }
 
+  if (path === '/wx-login' && method === 'POST') {
+  return handleWxLogin(request, env);
+}
+  
   if (path === '/logout' && (method === 'GET' || method === 'POST')) {
     return handleLogout();
   }
