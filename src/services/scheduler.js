@@ -28,6 +28,7 @@
  *
  */
 
+import { sendWxNotifyToAll } from './notify/wechat-subscribe.js';
 import { getConfig } from '../data/config.js';
 import { getAllSubscriptions } from '../data/subscriptions.js';
 import * as subRepo from '../data/subscriptions.repo.js';
@@ -227,6 +228,7 @@ export async function checkExpiringSubscriptions(env) {
       }
     );
     sentCount = dispatchResult.successCount;
+    await sendWxNotifyToAll(env, enrichedSubs);
 
     const entry = await schedulerLogsRepo.writeLog(env, {
       startedAt: startedAtIso,
