@@ -2,7 +2,7 @@ import { getConfig } from '../../data/config.js';
 import { generateJWT } from '../../core/auth.js';
 
 const APP_ID = 'wx31089b7fb811b8c2';
-const APP_SECRET = '你的AppSecret';
+const APP_SECRET = '5af6386061903ab60fe558090c9af819';
 
 export async function handleWxLogin(request, env) {
   try {
