@@ -22,7 +22,7 @@ const DEFAULT_CONFIG = {
   BARK_DEVICE_KEY: '',
   BARK_SERVER: 'https://api.day.app',
   BARK_IS_ARCHIVE: 'false',
-  ENABLED_NOTIFIERS: ['notifyx'],
+  ENABLED_NOTIFIERS: [],
   THEME_MODE: 'system',
   TIMEZONE: 'Asia/Shanghai',
   NOTIFICATION_HOURS: [],
